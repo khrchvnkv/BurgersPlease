@@ -1,45 +1,28 @@
 using System.Collections;
 using Common.Infrastructure.Services.Coroutines;
+using DG.Tweening;
 using UnityEngine;
-using VContainer;
+using Zenject;
 
 namespace Common.UnityLogic.UI.LoadingScreen
 {
     public class LoadingCurtain : MonoBehaviour
     {
-        private const float FADE_SPEED = 0.1f;
+        private const float FADE_DURATION = 1.5f;
 
         [SerializeField] private CanvasGroup _canvasGroup;
         
-        private ICoroutineRunner _coroutineRunner;
-        private Coroutine _coroutine;
-
-        [Inject]
-        public void Construct(ICoroutineRunner coroutineRunner)
-        {
-            _coroutineRunner = coroutineRunner;
-        }
         public void Show()
         {
-            StopCoroutine();
-            gameObject.SetActive(true);
+            DOTween.Kill(_canvasGroup);
             _canvasGroup.alpha = 1.0f;
+            _canvasGroup.gameObject.SetActive(true);
         }
         public void Hide()
         {
-            StopCoroutine();
-            _coroutine = _coroutineRunner.StartCoroutine(FadeCoroutine());
-        }
-        private void StopCoroutine() => _coroutineRunner.StopCoroutineSafe(_coroutine);
-        private IEnumerator FadeCoroutine()
-        {
-            var delay = new WaitForSeconds(FADE_SPEED);
-            while (_canvasGroup.alpha > 0.0f)
-            {
-                _canvasGroup.alpha -= FADE_SPEED;
-                yield return delay;
-            }
-            _canvasGroup.gameObject.SetActive(false);
+            DOTween.Kill(_canvasGroup);
+            DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 0.0f, FADE_DURATION)
+                .OnComplete(() => _canvasGroup.gameObject.SetActive(false));
         }
     }
 }

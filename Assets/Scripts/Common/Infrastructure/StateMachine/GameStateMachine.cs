@@ -10,13 +10,12 @@ namespace Common.Infrastructure.StateMachine
 
         private IExitableState _activeState;
 
-        public GameStateMachine(BootstrapState bootstrapState, LoadMainMenuState loadMainMenuState,
-            LoadLevelState loadLevelState, GameLoopState gameLoopState)
+        public GameStateMachine(BootstrapState bootstrapState, LoadLevelState loadLevelState, 
+            GameLoopState gameLoopState)
         {
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootstrapState)] = bootstrapState,
-                [typeof(LoadMainMenuState)] = loadMainMenuState,
                 [typeof(LoadLevelState)] = loadLevelState,
                 [typeof(GameLoopState)] = gameLoopState,
             };

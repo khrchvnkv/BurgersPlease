@@ -1,13 +1,11 @@
 using System.Collections.Generic;
+using Common.Infrastructure.Factories.Zenject;
 using Common.Infrastructure.Services.AssetsManagement;
 using Common.Infrastructure.Services.DontDestroyOnLoadCreator;
 using Common.Infrastructure.Services.StaticData;
 using Common.Infrastructure.WindowsManagement;
-using Common.UnityLogic.UI.LoadingScreen;
 using Common.UnityLogic.UI.Windows;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
 
 namespace Common.Infrastructure.Factories.UIFactory
 {
@@ -18,19 +16,19 @@ namespace Common.Infrastructure.Factories.UIFactory
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
         private readonly IDontDestroyOnLoadCreator _dontDestroyOnLoadCreator;
-        private readonly IObjectResolver _objectResolver;
+        private readonly IZenjectFactory _zenjectFactory;
 
         private readonly Dictionary<string, GameObject> _createdObjects;
 
         private UIRoot _uiRoot;
 
         public UIFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, 
-            IDontDestroyOnLoadCreator dontDestroyOnLoadCreator, IObjectResolver objectResolver)
+            IDontDestroyOnLoadCreator dontDestroyOnLoadCreator, IZenjectFactory zenjectFactory)
         {
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
             _dontDestroyOnLoadCreator = dontDestroyOnLoadCreator;
-            _objectResolver = objectResolver;
+            _zenjectFactory = zenjectFactory;
             _createdObjects = new Dictionary<string, GameObject>();
         }
         public void CreateUIRoot()
@@ -38,15 +36,14 @@ namespace Common.Infrastructure.Factories.UIFactory
             if (_uiRoot is not null) Object.Destroy(_uiRoot.gameObject);
 
             var prefab = _staticDataService.GameStaticData.WindowStaticData.UIRoot;
-            _uiRoot = _objectResolver.Instantiate(prefab);
-            _dontDestroyOnLoadCreator.MarkAsDontDestroy(_uiRoot.gameObject);
+            _uiRoot = _zenjectFactory.Instantiate(prefab);
         }
         public void ShowLoadingCurtain()
         {
             if (_uiRoot.LoadingCurtain is null)
             {
                 var prefab = _staticDataService.GameStaticData.WindowStaticData.LoadingCurtainPrefab;
-                _uiRoot.LoadingCurtain = _objectResolver.Instantiate(prefab, _uiRoot.transform);
+                _uiRoot.LoadingCurtain = _zenjectFactory.Instantiate(prefab, _uiRoot.transform);
             }
             _uiRoot.LoadingCurtain.Show();
         }
@@ -57,7 +54,7 @@ namespace Common.Infrastructure.Factories.UIFactory
             {
                 var path = string.Format(UI_PATH, data.WindowName);
                 var windowPrefab = _assetProvider.Load(path);
-                window = _objectResolver.Instantiate(windowPrefab, _uiRoot.WindowsParent);
+                window = _zenjectFactory.Instantiate(windowPrefab, _uiRoot.WindowsParent);
                 _createdObjects.Add(data.WindowName, window);
             }
             

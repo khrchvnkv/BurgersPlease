@@ -1,7 +1,7 @@
 using Common.Infrastructure.StateMachine;
 using Common.Infrastructure.StateMachine.States;
 using UnityEngine;
-using VContainer;
+using Zenject;
 
 namespace Common.Infrastructure
 {

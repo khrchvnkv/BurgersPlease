@@ -4,9 +4,8 @@ namespace Common
     {
         public static class Scenes
         {
-            public const string InitialScene = "Bootstrap";
-            public const string MainMenuScene = "MainMenuScene";
-            public const string LoadLevelScene = "GameScene";
+            public const string BootstrapScene = "Bootstrap";
+            public const string GameScene = "GameScene";
         }
     }
 }

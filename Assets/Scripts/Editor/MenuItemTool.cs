@@ -13,6 +13,12 @@ namespace Editor
             EditorSceneManager.OpenScene("Assets/Scenes/Bootstrap.unity", OpenSceneMode.Single);
         }
         
+        [MenuItem("Shortcuts/Open Gameplay Scene", false, 1)]
+        public static void OpenGameplayScene()
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity", OpenSceneMode.Single);
+        }
+        
         [MenuItem("Shortcuts/StaticData/Open GameStaticData")]
         public static void OpenGameStaticData()
         {
