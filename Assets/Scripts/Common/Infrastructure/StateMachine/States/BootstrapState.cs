@@ -31,7 +31,7 @@ namespace Common.Infrastructure.StateMachine.States
             LoadStaticData();
             CreateUIRootAndShowLoadingCurtain();
             
-            StateMachine.Enter<LoadMainMenuState, string>(Constants.Scenes.MainMenuScene);
+            StateMachine.Enter<LoadLevelState>();
         }
         public override void Exit()
         { }
