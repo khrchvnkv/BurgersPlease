@@ -38,6 +38,7 @@ namespace Common.Infrastructure.Factories.UIFactory
             var prefab = _staticDataService.GameStaticData.WindowStaticData.UIRoot;
             _uiRoot = _zenjectFactory.Instantiate(prefab);
         }
+        public void SetJoystickAreaActivity(bool isActive) => _uiRoot.JoystickParent.SetActive(isActive);
         public void ShowLoadingCurtain()
         {
             if (_uiRoot.LoadingCurtain is null)

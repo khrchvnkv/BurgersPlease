@@ -1,10 +1,13 @@
+using Common.Infrastructure.Factories.CharacterFactory;
 using Common.Infrastructure.Factories.UIFactory;
 using Common.Infrastructure.Factories.Zenject;
 using Common.Infrastructure.Services.AssetsManagement;
 using Common.Infrastructure.Services.Coroutines;
 using Common.Infrastructure.Services.DontDestroyOnLoadCreator;
+using Common.Infrastructure.Services.Input;
 using Common.Infrastructure.Services.Progress;
 using Common.Infrastructure.Services.SaveLoad;
+using Common.Infrastructure.Services.SceneContext;
 using Common.Infrastructure.Services.SceneLoading;
 using Common.Infrastructure.Services.StaticData;
 using Common.Infrastructure.StateMachine;
@@ -12,7 +15,7 @@ using Common.Infrastructure.StateMachine.States;
 using UnityEngine;
 using Zenject;
 
-namespace Common.Infrastructure
+namespace Common.Infrastructure.ContextInstallers.Project
 {
     public sealed class DiContainerInstaller : MonoInstaller
     {
@@ -35,9 +38,11 @@ namespace Common.Infrastructure
         {
             Container.Bind<IAssetProvider>().To<AssetProvider>().FromNew().AsSingle();
             Container.Bind<IStaticDataService>().To<StaticDataService>().FromNew().AsSingle();
+            Container.Bind<ISceneContextService>().To<SceneContextService>().FromNew().AsSingle();
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().FromNew().AsSingle();
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().FromNew().AsSingle();
             Container.Bind<ISceneLoader>().To<SceneLoader>().FromNew().AsSingle();
+            Container.Bind<IInputService>().To<MobileInputService>().FromNew().AsSingle();
         }
         private void BindGameStateMachine()
         {
@@ -49,6 +54,7 @@ namespace Common.Infrastructure
         private void BindFactories()
         {
             Container.Bind<IUIFactory>().To<UIFactory>().FromNew().AsSingle();
+            Container.Bind<ICharacterFactory>().To<CharacterFactory>().FromNew().AsSingle();
             Container.Bind<IZenjectFactory>().To<ZenjectFactory>().AsSingle();
         }
     }

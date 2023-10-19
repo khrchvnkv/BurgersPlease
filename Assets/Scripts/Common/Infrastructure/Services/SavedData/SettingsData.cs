@@ -6,8 +6,8 @@ namespace Common.Infrastructure.Services.SavedData
     [Serializable]
     public class SettingsData
     {
-        [SerializeField] public bool SoundOn;
-        [SerializeField] public bool MusicOn;
+        public bool SoundOn;
+        public bool MusicOn;
 
         public SettingsData()
         {

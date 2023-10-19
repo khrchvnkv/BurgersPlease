@@ -5,6 +5,7 @@ namespace Common.Infrastructure.Factories.UIFactory
     public interface IUIFactory
     {
         void CreateUIRoot();
+        void SetJoystickAreaActivity(bool isActive);
         void ShowLoadingCurtain();
         void HideLoadingCurtain();
         void ShowWindow<TData>(TData data) where TData : struct, IWindowData;

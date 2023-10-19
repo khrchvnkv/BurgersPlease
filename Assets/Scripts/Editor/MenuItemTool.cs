@@ -1,3 +1,4 @@
+using Common;
 using Common.StaticData;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -8,17 +9,13 @@ namespace Editor
     public static class MenuItemTool
     {
         [MenuItem("Shortcuts/Open Bootstrap Scene", false, 1)]
-        public static void OpenBootstrapScene()
-        {
-            EditorSceneManager.OpenScene("Assets/Scenes/Bootstrap.unity", OpenSceneMode.Single);
-        }
-        
+        public static void OpenBootstrapScene() => 
+            EditorSceneManager.OpenScene($"Assets/Scenes/{Constants.Scenes.BootstrapScene}.unity", OpenSceneMode.Single);
+
         [MenuItem("Shortcuts/Open Gameplay Scene", false, 1)]
-        public static void OpenGameplayScene()
-        {
-            EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity", OpenSceneMode.Single);
-        }
-        
+        public static void OpenGameplayScene() => 
+            EditorSceneManager.OpenScene($"Assets/Scenes/{Constants.Scenes.GameScene}.unity", OpenSceneMode.Single);
+
         [MenuItem("Shortcuts/StaticData/Open GameStaticData")]
         public static void OpenGameStaticData()
         {

@@ -10,7 +10,7 @@ namespace Common.Infrastructure
         private GameStateMachine _gameStateMachine;
         
         [Inject]
-        public void Construct(GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine)
         {
             _gameStateMachine = gameStateMachine;
             Init();

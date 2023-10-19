@@ -5,6 +5,7 @@ namespace Common.UnityLogic.UI.Windows
 {
     public sealed class UIRoot : MonoBehaviour
     {
+        [field: SerializeField] public GameObject JoystickParent { get; private set; }
         [field: SerializeField] public Transform WindowsParent { get; private set; }
         [field: SerializeField] public LoadingCurtain LoadingCurtain { get; set; }
     }
