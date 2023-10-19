@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/KeyStore
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
