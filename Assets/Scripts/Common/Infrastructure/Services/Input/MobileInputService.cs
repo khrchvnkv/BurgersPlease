@@ -10,10 +10,9 @@ namespace Common.Infrastructure.Services.Input
 
         private readonly IUIFactory _uiFactory;
         
-        private bool _isActive;
-        
+        public bool IsActive { get; private set; }
         public Vector2 Axis => 
-            !_isActive ? Vector2.zero : new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+            !IsActive ? Vector2.zero : new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
         public MobileInputService(IUIFactory uiFactory)
         {
@@ -22,14 +21,14 @@ namespace Common.Infrastructure.Services.Input
         
         public void ActivateInput()
         {
-            _isActive = true;
+            IsActive = true;
             UpdateJoystickAreaActivity();
         }
         public void DeactivateInput()
         {
-            _isActive = false;
+            IsActive = false;
             UpdateJoystickAreaActivity();
         }
-        private void UpdateJoystickAreaActivity() => _uiFactory.SetJoystickAreaActivity(_isActive);
+        private void UpdateJoystickAreaActivity() => _uiFactory.SetJoystickAreaActivity(IsActive);
     }
 }

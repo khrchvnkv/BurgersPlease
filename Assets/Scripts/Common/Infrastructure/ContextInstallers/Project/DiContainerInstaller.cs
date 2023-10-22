@@ -10,6 +10,7 @@ using Common.Infrastructure.Services.SaveLoad;
 using Common.Infrastructure.Services.SceneContext;
 using Common.Infrastructure.Services.SceneLoading;
 using Common.Infrastructure.Services.StaticData;
+using Common.Infrastructure.Services.UpdateSystem;
 using Common.Infrastructure.StateMachine;
 using Common.Infrastructure.StateMachine.States;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Common.Infrastructure.ContextInstallers.Project
     {
         [SerializeField] private DontDestroyOnLoadCreator _dontDestroyOnLoadCreator;
         [SerializeField] private CoroutineRunner _coroutineRunner;
+        [SerializeField] private UpdateSystem _updateSystem;
 
         public override void InstallBindings()
         {
@@ -33,6 +35,7 @@ namespace Common.Infrastructure.ContextInstallers.Project
         {
             Container.Bind<IDontDestroyOnLoadCreator>().FromInstance(_dontDestroyOnLoadCreator).AsSingle();
             Container.Bind<ICoroutineRunner>().FromInstance(_coroutineRunner).AsSingle();
+            Container.Bind<IUpdateSystem>().FromInstance(_updateSystem).AsSingle();
         }
         private void BindServices()
         {

@@ -1,10 +1,8 @@
 using Common.Infrastructure.Factories.CharacterFactory;
 using Common.Infrastructure.Factories.UIFactory;
-using Common.Infrastructure.Services.Progress;
 using Common.Infrastructure.Services.SceneContext;
 using Common.Infrastructure.Services.SceneLoading;
 using Common.Infrastructure.Services.StaticData;
-using Common.StaticData;
 using Cysharp.Threading.Tasks;
 
 namespace Common.Infrastructure.StateMachine.States
@@ -13,18 +11,15 @@ namespace Common.Infrastructure.StateMachine.States
     {
         private readonly ISceneContextService _sceneContextService;
         private readonly IStaticDataService _staticDataService;
-        private readonly IPersistentProgressService _progressService;
         private readonly ISceneLoader _sceneLoader;
         private readonly ICharacterFactory _characterFactory;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(ISceneContextService sceneContextService, IStaticDataService staticDataService, 
-            IPersistentProgressService progressService, ISceneLoader sceneLoader, ICharacterFactory characterFactory,
-            IUIFactory uiFactory)
+            ISceneLoader sceneLoader, ICharacterFactory characterFactory, IUIFactory uiFactory)
         {
             _sceneContextService = sceneContextService;
             _staticDataService = staticDataService;
-            _progressService = progressService;
             _sceneLoader = sceneLoader;
             _characterFactory = characterFactory;
             _uiFactory = uiFactory;
@@ -42,10 +37,7 @@ namespace Common.Infrastructure.StateMachine.States
         private void SpawnPlayer()
         {
             var spawnPoint = _sceneContextService.CharacterSpawnPoint;
-            var skinIndex = _progressService.SaveData.Progress.SelectedCharacterSkinIndex;
-            CharacterStaticData characterData = skinIndex.HasValue ? 
-                _staticDataService.GameStaticData.GetCharacterStaticData((int)skinIndex) : 
-                _staticDataService.GameStaticData.GetDefaultCharacterStaticData();
+            var characterData = _staticDataService.GetCharacterStaticData();
 
             _characterFactory.InstantiateCharacter(characterData.Prefab, spawnPoint);
         }
