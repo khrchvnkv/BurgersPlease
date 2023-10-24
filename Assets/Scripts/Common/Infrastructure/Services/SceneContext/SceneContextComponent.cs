@@ -1,4 +1,3 @@
-using Common.Infrastructure.Factories.CharacterFactory;
 using UnityEngine;
 using Zenject;
 

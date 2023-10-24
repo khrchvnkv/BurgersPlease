@@ -7,5 +7,6 @@ namespace Common.Infrastructure.Services.StaticData
         GameStaticData GameStaticData { get; }
 
         void Load();
+        public CharacterStaticData GetCharacterStaticData();
     }
 }

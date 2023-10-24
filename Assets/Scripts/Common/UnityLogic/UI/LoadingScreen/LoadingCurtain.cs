@@ -1,8 +1,5 @@
-using System.Collections;
-using Common.Infrastructure.Services.Coroutines;
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
 
 namespace Common.UnityLogic.UI.LoadingScreen
 {
@@ -16,11 +13,13 @@ namespace Common.UnityLogic.UI.LoadingScreen
         {
             DOTween.Kill(_canvasGroup);
             _canvasGroup.alpha = 1.0f;
+            _canvasGroup.blocksRaycasts = true;
             _canvasGroup.gameObject.SetActive(true);
         }
         public void Hide()
         {
             DOTween.Kill(_canvasGroup);
+            _canvasGroup.blocksRaycasts = false;
             DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 0.0f, FADE_DURATION)
                 .OnComplete(() => _canvasGroup.gameObject.SetActive(false));
         }
