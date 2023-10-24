@@ -11,6 +11,9 @@ namespace Common.StaticData
     {
         [field: Header("GAMEPLAY DATA")]
         [field: SerializeField, Expandable] public StackingStaticData StackingStaticData { get; private set; }
+        [field: SerializeField, Expandable] public ZonesStaticData ZonesStaticData { get; private set; }
+        [field: SerializeField, Expandable] public ItemStaticData ItemStaticData { get; private set; }
+        
         [SerializeField, Expandable] private List<CharacterStaticData> _characterStaticDatas;
 
         [field: Header("UI DATA")]

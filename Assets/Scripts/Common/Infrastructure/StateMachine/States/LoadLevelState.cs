@@ -3,6 +3,7 @@ using Common.Infrastructure.Factories.UIFactory;
 using Common.Infrastructure.Services.SceneContext;
 using Common.Infrastructure.Services.SceneLoading;
 using Common.Infrastructure.Services.StaticData;
+using Common.UnityLogic.UI.GameHUD;
 using Cysharp.Threading.Tasks;
 
 namespace Common.Infrastructure.StateMachine.States
@@ -25,11 +26,11 @@ namespace Common.Infrastructure.StateMachine.States
             _uiFactory = uiFactory;
         }
 
-        public void Enter() => 
-            _sceneLoader.LoadSceneAsync(Constants.Scenes.GameScene, OnGameSceneLoaded).Forget();
+        public void Enter() => _sceneLoader.LoadSceneAsync(Constants.Scenes.GameScene, OnGameSceneLoaded).Forget();
         public override void Exit() => _uiFactory.HideLoadingCurtain();
         private void OnGameSceneLoaded()
         {
+            ShowGameHud();
             SpawnPlayer();
 
             StateMachine.Enter<GameLoopState>();
@@ -41,5 +42,6 @@ namespace Common.Infrastructure.StateMachine.States
 
             _characterFactory.InstantiateCharacter(characterData.Prefab, spawnPoint);
         }
+        private void ShowGameHud() => _uiFactory.ShowWindow(new GameHudWindowData());
     }
 }

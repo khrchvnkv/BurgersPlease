@@ -11,14 +11,14 @@ namespace Common.UnityLogic.Triggers
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out PlayerTagProvider _))
+            if (other.gameObject.TryGetComponent(out PlayerProvider _))
             {
                 OnEntered?.Invoke();
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out PlayerTagProvider _))
+            if (other.gameObject.TryGetComponent(out PlayerProvider _))
             {
                 OnExited?.Invoke();
             }

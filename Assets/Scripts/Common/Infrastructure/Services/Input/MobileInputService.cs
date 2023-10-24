@@ -5,20 +5,19 @@ namespace Common.Infrastructure.Services.Input
 {
     public class MobileInputService : IInputService
     {
-        private const string Horizontal = "Horizontal";
-        private const string Vertical = "Vertical";
+        protected const string Horizontal = "Horizontal";
+        protected const string Vertical = "Vertical";
 
         private readonly IUIFactory _uiFactory;
         
         public bool IsActive { get; private set; }
-        public Vector2 Axis => 
+        public virtual Vector2 Axis => 
             !IsActive ? Vector2.zero : new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
         public MobileInputService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
         }
-        
         public void ActivateInput()
         {
             IsActive = true;

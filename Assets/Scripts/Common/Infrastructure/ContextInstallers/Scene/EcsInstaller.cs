@@ -8,9 +8,7 @@ namespace Common.Infrastructure.ContextInstallers.Scene
     {
         [SerializeField] private EcsStartup _ecsStartup;
         
-        public override void InstallBindings()
-        {
+        public override void InstallBindings() => 
             Container.Bind<IEcsStartup>().FromInstance(_ecsStartup).AsSingle().NonLazy();
-        }
     } 
 }
