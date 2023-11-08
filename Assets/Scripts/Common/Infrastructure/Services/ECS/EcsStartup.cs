@@ -1,8 +1,6 @@
 using Common.Infrastructure.Services.UpdateSystem;
 using Common.UnityLogic.Ecs.Systems;
 using Common.UnityLogic.Ecs.Systems.Characters.Player;
-using Common.UnityLogic.Ecs.Systems.Events;
-using Common.UnityLogic.Ecs.Systems.Items;
 using Common.UnityLogic.Ecs.Systems.Zones;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -60,8 +58,6 @@ namespace Common.Infrastructure.Services.ECS
             AddEcsSystem<PlayerMovementSystem>(_updateSystems);
             AddEcsSystem<CreationZoneSystem>(_updateSystems);
             AddEcsSystem<SalesZoneSystem>(_updateSystems);
-            AddEcsSystem<ZoneEventsHandlerSystem>(_updateSystems);
-            AddEcsSystem<ItemsEventsHandlerSystem>(_updateSystems);
 
             // FixedUpdate
             

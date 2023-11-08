@@ -7,7 +7,7 @@ namespace Common.UnityLogic.Ecs.Components.Characters
     [Serializable]
     public struct AnimatorComponent
     {
-        [SerializeField] public Animator _animator;
+        [SerializeField] private Animator _animator;
         [SerializeField, AnimatorParam(nameof(_animator))] private int _movementSpeedHash;
 
         public void UpdateMovementSpeed(float movementMagnitude)
